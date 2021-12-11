@@ -44,4 +44,12 @@ RSpec.describe 'application' do
     expect(page).to have_link("Veterinarians")
     expect(page).to have_link("Veterinary Offices")
   end
+
+  it 'displays a link to visit the admin page' do
+    visit '/'
+
+    expect(page).to have_link("Admin Menu (Admins Only)")
+    click_link("Admin Menu (Admins Only)")
+    expect(page).to have_current_path('/admin')  
+  end
 end
