@@ -50,6 +50,14 @@ RSpec.describe 'application' do
 
     expect(page).to have_link("Admin Menu (Admins Only)")
     click_link("Admin Menu (Admins Only)")
-    expect(page).to have_current_path('/admin')  
+    expect(page).to have_current_path('/admin')
+  end
+
+  it 'displays a link to visit the application index page' do
+    visit '/'
+
+    expect(page).to have_link("View All Applications")
+    click_link("View All Applications")
+    expect(page).to have_current_path('/applications')  
   end
 end
