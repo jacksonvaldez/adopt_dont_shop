@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+
+  # Added Routes
+  get '/admin', to: 'admin#index'
+  get '/admin/applications', to: 'adminapplications#index'
+  get '/admin/applications/:id', to: 'adminapplications#show'
+
+
+
+
+
+
+
+  # Pre-Made Routes
   get '/', to: 'application#welcome'
 
   get '/shelters', to: 'shelters#index'
