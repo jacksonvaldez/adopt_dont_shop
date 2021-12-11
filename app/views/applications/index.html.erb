@@ -1,5 +1,4 @@
 <% @applications.each do |application| %>
-
-  <p><%= application.applicant %>: <%= link_to 'View Application', "/applications/#{application.id}"%></p>
-
+  <p><%= link_to "View Application (#{application.applicant})", "/applications/#{application.id}"%></p>
 <% end %>
+<p><%= link_to 'New Application', '/applications/new' %></p>

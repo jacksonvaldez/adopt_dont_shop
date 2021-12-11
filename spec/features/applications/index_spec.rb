@@ -17,13 +17,15 @@ RSpec.describe 'Applications Index Page' do
   end
 
   it 'displays a link to visit each applications show page' do
-    expect(page).to have_content("John Wick: View Application")
-    expect(page).to have_link("View Application")
+    expect(page).to have_link("View Application (John Wick)")
+    click_link("View Application (John Wick)")
+    expect(page).to have_current_path("/applications/#{@application_1.id}")
   end
 
-  it 'the link next to each application takes you to its show page' do
-    click_link("View Application")
-    expect(page).to have_current_path("/applications/#{@application_1.id}")
+  it 'displays a link to create a new application' do
+    expect(page).to have_link("New Application")
+    click_link("New Application")
+    expect(page).to have_current_path("/applications/new")
   end
 
 end
