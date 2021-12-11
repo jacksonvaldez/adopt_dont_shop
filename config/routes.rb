@@ -2,8 +2,8 @@ Rails.application.routes.draw do
 
   # Added Routes
   get '/admin', to: 'admin#index'
-  get '/admin/applications', to: 'adminapplications#index'
-  get '/admin/applications/:id', to: 'adminapplications#show'
+  get '/admin/applications', to: 'admin_applications#index'
+  get '/admin/applications/:id', to: 'admin_applications#show'
 
 
 
