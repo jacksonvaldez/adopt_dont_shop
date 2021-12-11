@@ -2,6 +2,7 @@ class Shelter < ApplicationRecord
   validates :name, presence: true
   validates :rank, presence: true, numericality: true
   validates :city, presence: true
+  validates_uniqueness_of :name
 
   has_many :pets, dependent: :destroy
 
