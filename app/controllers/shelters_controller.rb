@@ -4,6 +4,7 @@ class SheltersController < ApplicationController
       @shelters = Shelter.order_by_number_of_pets
     elsif params[:sort].present? && params[:sort] == "name"
       @shelters = Shelter.order_by_name
+      @pending_shelters = Shelter.with_pending_applications
     elsif params[:search].present?
       @shelters = Shelter.search(params[:search])
     else

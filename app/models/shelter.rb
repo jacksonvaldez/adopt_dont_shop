@@ -5,6 +5,7 @@ class Shelter < ApplicationRecord
   validates_uniqueness_of :name
 
   has_many :pets, dependent: :destroy
+  has_many :applications, through: :pets
 
   def self.order_by_recently_created
     order(created_at: :desc)
@@ -12,6 +13,14 @@ class Shelter < ApplicationRecord
 
   def self.order_by_name
     self.find_by_sql("SELECT * FROM shelters ORDER BY lower(name) DESC;")
+  end
+
+  def self.with_pending_applications
+    # Ask question
+    Shelter.all.find_all do |shelter|
+      apps = shelter.applications.where(status: 'Pending')
+      !apps.empty?
+    end
   end
 
   def self.order_by_number_of_pets
