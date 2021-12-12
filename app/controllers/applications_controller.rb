@@ -32,4 +32,12 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  def update
+    if params[:pet_id].present?
+      ApplicationPet.create(application_id: params[:id], pet_id: params[:pet_id])
+
+    end
+    redirect_to "/applications/#{params[:id]}"
+  end
+
 end

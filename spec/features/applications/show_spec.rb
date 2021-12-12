@@ -41,4 +41,12 @@ RSpec.describe 'Application Show Page' do
     expect(page).to have_content('Puffles')
   end
 
+  it 'when pet search is ran, and you add a pet, it saves to the form' do
+    fill_in(:search_text, with: 'Puffles')
+    click_button('Find Pet')
+    click_button('Adopt This Pet')
+    expect(current_path).to eq("/applications/#{@application_1.id}")
+    expect(page).to have_content("Pet Names: Puffles")
+  end
+
 end
