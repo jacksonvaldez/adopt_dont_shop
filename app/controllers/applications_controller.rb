@@ -18,7 +18,7 @@ class ApplicationsController < ApplicationController
         applicant: params[:applicant_name],
         applicant_address: "#{params[:street_address]}, #{params[:city]}, #{params[:state]}, #{params[:zip_code]}" ,
         description: params[:description],
-        status: 'Pending'
+        status: 'In Progress'
       )
       redirect_to "/applications/#{application.id}"
     else
