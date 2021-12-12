@@ -8,7 +8,7 @@ RSpec.describe 'New Application Form' do
 
   it 'redirects back to form if one of the required fields are not filled' do
     click_button('Submit Application')
-    expect(page).to have_current_path('/applications/new')
+    expect(current_path).to eq('/applications/new')
   end
 
   it 'redirects to correct path after submitting' do

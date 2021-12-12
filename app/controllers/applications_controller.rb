@@ -9,6 +9,7 @@ class ApplicationsController < ApplicationController
   end
 
   def new
+    @error_message = params[:error_message]
   end
 
   def create
@@ -21,7 +22,8 @@ class ApplicationsController < ApplicationController
       )
       redirect_to "/applications/#{application.id}"
     else
-      redirect_to '/applications/new'
+      error_message = 'Error: You did not fill in all required fields'
+      redirect_to controller: 'applications', action: 'new', error_message: error_message
     end
   end
 
