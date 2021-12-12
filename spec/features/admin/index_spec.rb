@@ -9,13 +9,13 @@ RSpec.describe 'Admin Index Page' do
   it 'displays a link to visit the admin application index page' do
     expect(page).to have_link('View Applications')
     click_link('View Applications')
-    expect(page).to have_current_path('/admin/applications')
+    expect(current_path).to eq('/admin/applications')
   end
 
   it 'displays a link to visit admin shelters index' do
     expect(page).to have_link('View Shelters')
     click_link('View Shelters')
-    expect(page).to have_current_path('/admin/shelters')
+    expect(current_path).to eq('/admin/shelters')
   end
 
 end
