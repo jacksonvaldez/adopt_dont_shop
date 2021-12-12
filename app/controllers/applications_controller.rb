@@ -22,7 +22,7 @@ class ApplicationsController < ApplicationController
       application = Application.create(
         applicant: params[:applicant_name],
         applicant_address: "#{params[:street_address]}, #{params[:city]}, #{params[:state]}, #{params[:zip_code]}" ,
-        description: params[:description],
+        description: '.',
         status: 'In Progress'
       )
       redirect_to "/applications/#{application.id}"

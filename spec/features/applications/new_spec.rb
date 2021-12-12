@@ -17,7 +17,6 @@ RSpec.describe 'New Application Form' do
     fill_in :city, with: 'Englewood'
     fill_in :state, with: 'Colorado'
     fill_in :zip_code, with: '80648'
-    fill_in :description, with: 'i am loving and caring and enjoy being around animals'
     click_button('Submit Application')
 
     expect(page).to have_current_path("/applications/#{Application.last.id}")
