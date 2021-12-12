@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get '/admin/applications', to: 'admin_applications#index'
   get '/admin/applications/:id', to: 'admin_applications#show'
 
+  post '/applications', to: 'applications#create'
+
 
 
 
