@@ -7,13 +7,27 @@
 </p>
 <p>Status: <%= @application.status %></p>
 
-<%= form_with method: :get, local: true do |form| %>
-  <h4><%= form.label "Add a pet to this application:" %></h4>
-  <%= form.text_field :search_text %>
+<% if @application.status == 'In Progress' %>
 
-  <%= form.submit 'Find Pet' %>
+  <%= form_with method: :get, local: true do |form| %>
+    <h4><%= form.label "Add a pet to this application:" %></h4>
+    <%= form.text_field :search_text %>
+
+    <%= form.submit 'Find Pet' %>
+  <% end %>
+
+  <% @pets.each do |pet| %>
+    <p> • <%= pet.name %><%= button_to 'Adopt This Pet', "/applications/#{@application.id}?pet_id=#{pet.id}", method: :patch %></p>
+  <% end %>
+
 <% end %>
 
-<% @pets.each do |pet| %>
-  <p> • <%= pet.name %><%= button_to 'Adopt This Pet', "/applications/#{@application.id}?pet_id=#{pet.id}", method: :patch %></p>
+
+<% if @application.pets != [] %>
+  <%= form_with method: :patch, local: true do |form| %>
+    <h4><%= form.label "Why would you be a good owner?:" %></h4>
+    <%= form.text_area :owner_description %>
+
+    <%= form.submit 'Submit Application' %>
+  <% end %>
 <% end %>

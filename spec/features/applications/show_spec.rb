@@ -27,6 +27,7 @@ RSpec.describe 'Application Show Page' do
   it 'displays a mini search form to add a pet to the application' do
     expect(page).to have_content('Add a pet to this application:')
     expect(page.has_field?(:search_text)).to eq(true)
+    expect(page).to have_button('Find Pet')
   end
 
   it 'when pet search is ran, it takes you to currect route' do
@@ -47,6 +48,40 @@ RSpec.describe 'Application Show Page' do
     click_button('Adopt This Pet')
     expect(current_path).to eq("/applications/#{@application_1.id}")
     expect(page).to have_content("Pet Names: Puffles")
+  end
+
+  it 'does not display an application submission option if no pets are added' do
+    expect(page).to_not have_button("Submit Application")
+    expect(page).to_not have_content("Why would you be a good owner?:")
+  end
+
+  it 'displays application submission option if pets are added' do
+    fill_in(:search_text, with: 'Puffles')
+    click_button('Find Pet')
+    click_button('Adopt This Pet')
+    expect(page).to have_button("Submit Application")
+    expect(page).to have_content("Why would you be a good owner?:")
+  end
+
+  it 'updates status after submitting' do
+    fill_in(:search_text, with: 'Puffles')
+    click_button('Find Pet')
+    click_button('Adopt This Pet')
+    fill_in(:owner_description, with: 'i like dog')
+    click_button('Submit Application')
+    expect(page).to have_content("Status: Pending")
+  end
+
+  it 'no longer displays ability to add pets after submitting' do
+    fill_in(:search_text, with: 'Puffles')
+    click_button('Find Pet')
+    click_button('Adopt This Pet')
+    fill_in(:owner_description, with: 'i like dog')
+    click_button('Submit Application')
+
+    expect(page).to_not have_content('Add a pet to this application:')
+    expect(page.has_field?(:search_text)).to eq(false)
+    expect(page).to_not have_button('Find Pet')
   end
 
 end

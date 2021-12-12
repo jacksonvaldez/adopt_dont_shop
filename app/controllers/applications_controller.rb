@@ -6,6 +6,7 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
+
     if params[:search_text].present?
       @pets = Pet.search(params[:search_text])
     else
@@ -33,10 +34,9 @@ class ApplicationsController < ApplicationController
   end
 
   def update
-    if params[:pet_id].present?
-      ApplicationPet.create(application_id: params[:id], pet_id: params[:pet_id])
-
-    end
+    application = Application.find(params[:id])
+    params[:pet_id].present? ? ApplicationPet.create(application_id: params[:id], pet_id: params[:pet_id]) : nil
+    params[:owner_description].present? ? application.update(description: params[:owner_description], status: 'Pending') : nil
     redirect_to "/applications/#{params[:id]}"
   end
 
