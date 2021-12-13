@@ -16,11 +16,19 @@ class Shelter < ApplicationRecord
   end
 
   def self.with_pending_applications
-    # Ask question
-    Shelter.all.find_all do |shelter|
-      apps = shelter.applications.where(status: 'Pending')
-      !apps.empty?
-    end
+
+    # self.find_by_sql("
+    #   SELECT DISTINCT shelters.* FROM shelters
+    #     JOIN pets ON pets.shelter_id = shelters.id
+    #     JOIN application_pets ON application_pets.pet_id = pets.id
+    #     JOIN applications ON application_pets.application_id = applications.id
+    #     WHERE applications.status = 'Pending' ;
+    #   ")
+      select('shelters.*')
+        .joins('JOIN pets ON pets.shelter_id = shelters.id')
+        .joins('JOIN application_pets ON application_pets.pet_id = pets.id')
+        .joins('JOIN applications ON application_pets.application_id = applications.id')
+        .where('applications.status' => 'Pending')
   end
 
   def self.order_by_number_of_pets
