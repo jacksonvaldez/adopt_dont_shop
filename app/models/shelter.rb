@@ -28,6 +28,7 @@ class Shelter < ApplicationRecord
       .joins('JOIN application_pets ON application_pets.pet_id = pets.id')
       .joins('JOIN applications ON application_pets.application_id = applications.id')
       .where('applications.status' => 'Pending')
+      .distinct
   end
 
   def self.order_by_number_of_pets
