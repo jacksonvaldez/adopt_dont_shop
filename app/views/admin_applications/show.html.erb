@@ -2,13 +2,13 @@
 <p>Applicant Address: <%= @application.applicant_address %></p>
 <p>Description: <%= @application.description %></p>
 <p>Status: <%= @application.status %></p>
-<p>Pets: <% @application.pet_statuses.each do |pet_id, name_status| %>
-  <p> • <%= name_status[0] %>
-    <% if name_status[1] == 'Pending' %>
-      <%= button_to 'Approve', "/admin/applications/#{@application.id}", method: :patch, params: {change_status_to: 'Approved', pet_id: pet_id} %>
-      <%= button_to 'Reject', "/admin/applications/#{@application.id}", method: :patch, params: {change_status_to: 'Rejected', pet_id: pet_id} %>
+<p>Pets: <% @application.pet_statuses.each do |pet, status| %>
+  <p> • <%= pet.name %>
+    <% if status == 'Pending' %>
+      <%= button_to 'Approve', "/admin/applications/#{@application.id}", method: :patch, params: {change_status_to: 'Approved', pet_id: pet.id} %>
+      <%= button_to 'Reject', "/admin/applications/#{@application.id}", method: :patch, params: {change_status_to: 'Rejected', pet_id: pet.id} %>
     <% else %>
-      (<%= name_status[1] %>)
+      (<%= status %>)
     <% end %>
   </p>
   <% end %>

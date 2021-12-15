@@ -14,7 +14,7 @@ class Application < ApplicationRecord
     pet_statuses = {}
     self.pets.each do |pet|
       status = ApplicationPet.find_by(application_id: self.id, pet_id: pet.id).status
-      pet_statuses[pet.id] = [pet.name, status]
+      pet_statuses[pet] = status
     end
     pet_statuses
   end

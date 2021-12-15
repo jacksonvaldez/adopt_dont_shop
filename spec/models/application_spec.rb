@@ -25,12 +25,12 @@ RSpec.describe Application, type: :model do
   describe '#pet_statuses' do
     it 'returns expected hash' do
       expected = {
-        @pet_1.id => [@pet_1.name, 'Pending'],
-        @pet_2.id => [@pet_2.name, 'Approved']
+        @pet_1 => 'Pending',
+        @pet_2 => 'Approved'
       }
 
       expect(@application_1.pet_statuses).to eq(expected)
     end
   end
-  
+
 end
