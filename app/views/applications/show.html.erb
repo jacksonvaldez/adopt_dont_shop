@@ -16,7 +16,7 @@
     <%= form.submit 'Find Pet' %>
   <% end %>
 
-  <% @pets.each do |pet| %>
+  <% @searched_pets.each do |pet| %>
     <p> • <%= pet.name %><%= button_to 'Adopt This Pet', "/applications/#{@application.id}?pet_id=#{pet.id}", method: :patch %></p>
   <% end %>
 

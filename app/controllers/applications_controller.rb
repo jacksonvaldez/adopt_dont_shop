@@ -6,16 +6,10 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
-
-    if params[:search_text].present?
-      @pets = Pet.search(params[:search_text])
-    else
-      @pets = []
-    end
+    @searched_pets = Pet.search(params[:search_text])
   end
 
   def new
-    @error_message = params[:error_message]
   end
 
   def create
@@ -28,8 +22,8 @@ class ApplicationsController < ApplicationController
       )
       redirect_to "/applications/#{application.id}"
     else
-      error_message = 'Error: You did not fill in all required fields'
-      redirect_to controller: 'applications', action: 'new', error_message: error_message
+      flash[:notice] = 'Error: You did not fill in all required fields'
+      redirect_to controller: 'applications', action: 'new'
     end
   end
 
