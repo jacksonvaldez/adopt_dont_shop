@@ -9,4 +9,13 @@ class Application < ApplicationRecord
   has_many :application_pets
   has_many :pets, through: :application_pets
   has_many :shelters, through: :pets
+
+  def pet_statuses
+    pet_statuses = {}
+    self.pets.each do |pet|
+      status = ApplicationPet.find_by(application_id: self.id, pet_id: pet.id).status
+      pet_statuses[pet.id] = [pet.name, status]
+    end
+    pet_statuses
+  end
 end
