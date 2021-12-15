@@ -11,6 +11,11 @@ RSpec.describe 'New Application Form' do
     expect(current_path).to eq('/applications/new')
   end
 
+  it 'displays error message if one of the required fields are not filled' do
+    click_button('Submit Application')
+    expect(page).to have_content('Error: You did not fill in all required fields')
+  end
+
   it 'redirects to correct path after submitting' do
     fill_in :applicant_name, with: 'Random Name'
     fill_in :street_address, with: '12345 Long Street'

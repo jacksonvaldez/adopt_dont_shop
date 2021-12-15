@@ -13,13 +13,13 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    if params[:applicant_name].present? && params[:street_address].present? && params[:city].present? && params[:state].present? && params[:zip_code].present?
-      application = Application.create(
-        applicant: params[:applicant_name],
-        applicant_address: "#{params[:street_address]}, #{params[:city]}, #{params[:state]}, #{params[:zip_code]}" ,
-        description: '.',
-        status: 'In Progress'
-      )
+    application = Application.new(
+      applicant: params[:applicant_name],
+      applicant_address: "#{params[:street_address]}, #{params[:city]}, #{params[:state]}, #{params[:zip_code]}" ,
+      description: '.',
+      status: 'In Progress'
+    )
+    if application.save
       redirect_to "/applications/#{application.id}"
     else
       flash[:notice] = 'Error: You did not fill in all required fields'
