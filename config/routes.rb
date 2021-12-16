@@ -6,13 +6,17 @@ Rails.application.routes.draw do
   get '/admin/applications', to: 'admin_applications#index'
   get '/admin/applications/:id', to: 'admin_applications#show'
   patch '/admin/applications/:id', to: 'admin_applications#update'
-  
+
   get '/applications', to: 'applications#index'
   get '/applications/new', to: 'applications#new'
   get '/applications/:id', to: 'applications#show'
 
   post '/applications', to: 'applications#create'
   patch '/applications/:id', to: 'applications#update'
+
+# User Stories to review during eval:
+  # 1. Submitting/Rejecting applications
+  # 2. Add A Pet To An Application
 
 
 

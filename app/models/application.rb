@@ -11,11 +11,9 @@ class Application < ApplicationRecord
   has_many :shelters, through: :pets
 
   def pet_statuses
-    pet_statuses = {}
-    self.pets.each do |pet|
-      status = ApplicationPet.find_by(application_id: self.id, pet_id: pet.id).status
-      pet_statuses[pet] = status
-    end
-    pet_statuses
+    ApplicationPet.where(application_id: self.id)
+      .joins('JOIN pets ON pets.id = application_pets.pet_id')
+      .select('pets.id AS pet_id, pets.name, application_pets.status')
+      # binding.pry
   end
 end

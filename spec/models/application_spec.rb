@@ -23,13 +23,15 @@ RSpec.describe Application, type: :model do
   end
 
   describe '#pet_statuses' do
-    it 'returns expected hash' do
-      expected = {
-        @pet_1 => 'Pending',
-        @pet_2 => 'Approved'
-      }
+    it 'returns expected return values' do
 
-      expect(@application_1.pet_statuses).to eq(expected)
+      # binding.pry
+      expect(@application_1.pet_statuses[0].pet_id).to eq(@pet_1.id)
+      expect(@application_1.pet_statuses[1].pet_id).to eq(@pet_2.id)
+      expect(@application_1.pet_statuses[0].name).to eq(@pet_1.name)
+      expect(@application_1.pet_statuses[1].name).to eq(@pet_2.name)
+      expect(@application_1.pet_statuses[0].status).to eq('Pending')
+      expect(@application_1.pet_statuses[1].status).to eq('Approved')
     end
   end
 
