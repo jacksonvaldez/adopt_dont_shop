@@ -11,7 +11,6 @@ class Application < ApplicationRecord
   has_many :shelters, through: :pets
 
   def pet_statuses
-    binding.pry
     ApplicationPet.where(application_id: self.id)
       .joins('JOIN pets ON pets.id = application_pets.pet_id')
       .select('pets.id AS pet_id, pets.name, application_pets.status')
